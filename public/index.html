@@ -141,18 +141,18 @@
       margin-bottom: 14px;
     }
     
+    /* 웹툰 감성 아바타 박스 */
     .advisor-avatar-box {
       width: 52px;
       height: 52px;
       border-radius: 50%;
       border: 2px solid #ffd700;
-      background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
+      background: linear-gradient(135deg, #311042 0%, #4f46e5 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      color: #ffd700;
       box-shadow: 0 0 12px rgba(255,215,0,0.5);
+      overflow: hidden;
     }
 
     .step-header {
@@ -189,29 +189,20 @@
       animation: fadeIn 0.6s ease-in-out;
     }
 
-    /* 윤곽 아이콘을 완전히 없애고 신비로운 빛무리 오라만 남긴 박스 */
-    .teaser-silhouette-wrap {
-      width: 130px;
-      height: 130px;
+    /* 한국 웹툰/인스타 감성 캐릭터 일러스트 원형 프레임 */
+    .teaser-tooon-wrap {
+      width: 140px;
+      height: 140px;
       margin: 0 auto 12px;
       border-radius: 50%;
+      overflow: hidden;
       border: 3px solid #ffd700;
-      background: radial-gradient(circle, rgba(147,51,234,0.4) 0%, rgba(15,12,29,0.95) 100%);
-      box-shadow: 0 0 30px rgba(255,215,0,0.4), inset 0 0 15px rgba(255,215,0,0.3);
+      background: linear-gradient(135deg, #2e1065 0%, #17102e 100%);
+      box-shadow: 0 0 30px rgba(255,215,0,0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-    
-    .mystic-glow-symbol {
-      font-size: 32px;
-      color: #ffd700;
-      text-shadow: 0 0 12px #ffd700;
-      animation: pulseGlow 2.5s infinite alternate;
-    }
-    @keyframes pulseGlow {
-      0% { transform: scale(0.95); opacity: 0.7; }
-      100% { transform: scale(1.05); opacity: 1; }
+      position: relative;
     }
   </style>
 </head>
@@ -230,7 +221,7 @@
     </div>
     <p class="hero-sub">생년월일로 파헤치는 소름 돋는 직설 풀이</p>
     <div class="chips">
-      <span class="chip">💖 운명의 인연 봉인</span>
+      <span class="chip">💖 운명의 인연 웹툰 일러스트</span>
       <span class="chip">💰 돈 터지는 날짜</span>
       <span class="chip">⚠️ 오늘 당장 피할 액운</span>
     </div>
@@ -296,12 +287,12 @@
         <div style="font-size: 36px; text-shadow: 0 0 10px #ffd700;">👑</div>
         <div>
           <span style="font-size: 11px; background: rgba(255,215,0,0.2); color: #ffd700; padding: 4px 10px; border-radius: 6px; font-weight: 800; border: 1px solid rgba(255,215,0,0.4);">PREMIUM SECRET</span>
-          <div style="font-size: 18px; color: #fff; font-weight: 800; margin-top: 4px;">너의 운명 인연 선명한 원본 프로필 & 만남 날짜 전체 해제</div>
+          <div style="font-size: 18px; color: #fff; font-weight: 800; margin-top: 4px;">너의 운명 인연 웹툰 일러스트 원본 & 만남 날짜 전체 해제</div>
         </div>
       </div>
 
       <p style="font-size: 13.5px; color: #cbd5e1; line-height: 1.6; margin-bottom: 16px;">
-        "사주 기운에 봉인된 인연 정보 보니까 대충 느낌 오지? 너 딱 이런 스타일 좋아하고 이런 애 만난다? 선명한 원본 프로필이랑 몇 월 며칠에 어디서 부딪히는지 다 적어놨으니까 아래 버튼 눌러서 바로 확인해봐!"
+        "아까 그 웹툰 캐릭터 실루엣 보니까 대충 느낌 오지? 너 딱 이런 스타일 좋아하고 이런 애 만난다? 선명한 원본 웹툰 일러스트 카드랑 몇 월 며칠에 어디서 부딪히는지 다 적어놨으니까 아래 버튼 눌러서 바로 확인해봐!"
       </p>
 
       <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); padding: 10px 12px; border-radius: 8px; margin-bottom: 16px; font-size: 11.5px; color: #fca5a5; line-height: 1.4; text-align: center;">
@@ -314,7 +305,7 @@
           <div style="font-size: 24px; color: #ffd700; font-weight: 800;">2,900원 <span style="font-size:12px; color:#ef4444; font-weight:700;">(1회 평생소장)</span></div>
         </div>
         <button onclick="alert('토스페이먼츠 결제 연동 페이지로 이동합니다!')" style="background: linear-gradient(135deg, #ffe885 0%, #c8963e 100%); color: #0f1015; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; box-shadow: 0 4px 20px rgba(212,175,55,0.5);">
-          2,900원에 인연 프로필 확인하기 ✦
+          2,900원에 인연 일러스트 확인하기 ✦
         </button>
       </div>
     </div>
@@ -367,6 +358,58 @@
       const advisorName = pickedAdvisor.name;
       const advisorDesc = pickedAdvisor.desc;
 
+      // 상단 프로필용 고품격 웹툰 아바타 SVG 일러스트
+      const advisorSvg = `
+        <svg viewBox="0 0 100 100" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="50" fill="#2d1b4e"/>
+          <circle cx="50" cy="38" r="20" fill="#fbcfe8"/>
+          <path d="M 25 85 Q 50 55 75 85 Z" fill="${isFemale ? '#3b82f6' : '#ec4899'}"/>
+          <path d="M 30 32 Q 50 15 70 32 Q 75 50 65 55 Q 50 45 35 55 Q 25 50 30 32 Z" fill="#1e1b4b"/>
+          <circle cx="50" cy="48" r="3" fill="#ffd700"/>
+        </svg>
+      `;
+
+      // 🇰🇷 하단 STEP 4 인연 캐릭터용 [한국 웹툰 스타일 남녀 일러스트 SVG] (외부 사진 0%, 외국인 0%)
+      const maleToonSvg = `
+        <svg viewBox="0 0 120 120" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="toonGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#1e1b4b" stop-opacity="1"/>
+            </radialGradient>
+          </defs>
+          <circle cx="60" cy="60" r="60" fill="url(#toonGlow)"/>
+          <!-- 훈남 웹툰 캐릭터 실루엣/윤곽 아트 -->
+          <path d="M 40 100 C 40 75 50 65 60 65 C 70 65 80 75 80 100 Z" fill="#9333ea" opacity="0.6"/>
+          <circle cx="60" cy="48" r="22" fill="#fed7aa"/>
+          <!-- 댄디한 훈남 흑발 헤어 -->
+          <path d="M 38 45 Q 40 20 60 22 Q 80 20 82 45 Q 85 30 75 20 Q 60 12 45 20 Q 35 30 38 45 Z" fill="#111827"/>
+          <!-- 은은한 빛 처리 -->
+          <circle cx="60" cy="60" r="56" fill="none" stroke="#ffd700" stroke-width="2.5" opacity="0.85"/>
+        </svg>
+      `;
+
+      const femaleToonSvg = `
+        <svg viewBox="0 0 120 120" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="toonGlowF" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#db2777" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#1e1b4b" stop-opacity="1"/>
+            </radialGradient>
+          </defs>
+          <circle cx="60" cy="60" r="60" fill="url(#toonGlowF)"/>
+          <!-- 청순 웹툰 여주 캐릭터 실루엣 아트 -->
+          <path d="M 38 100 C 38 75 48 68 60 68 C 72 68 82 75 82 100 Z" fill="#f43f5e" opacity="0.6"/>
+          <circle cx="60" cy="50" r="20" fill="#ffedd5"/>
+          <!-- 청순한 긴 생머리/웨이브 헤어 -->
+          <path d="M 36 45 Q 35 18 60 20 Q 85 18 84 45 Q 90 70 82 95 Q 75 70 80 45 Q 60 28 40 45 Q 45 70 38 95 Q 30 70 36 45 Z" fill="#1f2937"/>
+          <!-- 은은한 빛 처리 -->
+          <circle cx="60" cy="60" r="56" fill="none" stroke="#ffd700" stroke-width="2.5" opacity="0.85"/>
+        </svg>
+      `;
+
+      const partnerToon = isFemale ? maleToonSvg : femaleToonSvg;
+
       const colors = ["보라색", "청록색", "크림 아이보리", "딥 네이비"];
       const places = ["조용한 분위기의 프랜차이즈 카페 창가 자리", "책이나 문구류가 많은 서점 또는 소품샵 근처", "사람이 북적이는 도심 속 대로변 교차로", "오후 햇살이 따스하게 잘 드는 야외 공간"];
       
@@ -385,7 +428,7 @@
         step1.className = 'step-card';
         step1.innerHTML = `
           <div class="advisor-profile">
-            <div class="advisor-avatar-box">✦</div>
+            <div class="advisor-avatar-box">${advisorSvg}</div>
             <div>
               <div style="font-size:15px; font-weight:800; color:#ffd700;">${advisorName} <span style="font-size:12px; color:#94a3b8; font-weight:normal;">(${advisorDesc})</span></div>
               <div style="font-size:12.5px; color:#e2e8f0;">"오냐, 네 생년월일 사주그릇을 좀 들여다보자..."</div>
@@ -416,7 +459,7 @@
         step2.className = 'step-card';
         step2.innerHTML = `
           <div class="advisor-profile">
-            <div class="advisor-avatar-box">✦</div>
+            <div class="advisor-avatar-box">${advisorSvg}</div>
             <div>
               <div style="font-size:15px; font-weight:800; color:#ffd700;">${advisorName}</div>
               <div style="font-size:12.5px; color:#e2e8f0;">"시간대별로 내가 시키는 대로만 움직여봐."</div>
@@ -449,7 +492,7 @@
         step3.className = 'step-card';
         step3.innerHTML = `
           <div class="advisor-profile">
-            <div class="advisor-avatar-box">✦</div>
+            <div class="advisor-avatar-box">${advisorSvg}</div>
             <div>
               <div style="font-size:15px; font-weight:800; color:#ffd700;">${advisorName}</div>
               <div style="font-size:12.5px; color:#f87171;">"이거 진짜 조심해라, 진지하다 나."</div>
@@ -467,7 +510,7 @@
             <li>🚗 <b>[이동/운전 경고]:</b> <span style="color:#f87171;">길 걸어가거나 운전할 때 딴생각하다가 하마터면 아찔한 상황 생길 수 있으니까 전방 주시 필수야.</span></li>
             <li>⚠️ <b>오늘 멀리할 인간:</b> 말 앞뒤가 다른 사람, 네 은근히 이용하려는 사람 주변에 있으니까 오늘 그 사람 연락은 무조건 씹어.</li>
           </ul>
-          <button class="next-step-btn" id="btn-step4">다음: 네가 만날 '운명의 인연' 봉인 확인하기 ✦</button>
+          <button class="next-step-btn" id="btn-step4">다음: 네가 만날 '운명의 인연' 웹툰 일러스트 보기 ✦</button>
         `;
         resultDiv.appendChild(step3);
         step3.scrollIntoView({ behavior: 'smooth' });
@@ -483,7 +526,7 @@
         step4.className = 'step-card';
         step4.innerHTML = `
           <div class="advisor-profile">
-            <div class="advisor-avatar-box">✦</div>
+            <div class="advisor-avatar-box">${advisorSvg}</div>
             <div>
               <div style="font-size:15px; font-weight:800; color:#ffd700;">${advisorName}</div>
               <div style="font-size:12.5px; color:#ffd700;">"드디어 나왔다... 너 딱 이런 인연 만난다?"</div>
@@ -491,7 +534,7 @@
           </div>
 
           <div class="step-header">
-            <span class="step-title">📍 STEP 4. 운명의 인연 장소 & 봉인 엿보기</span>
+            <span class="step-title">📍 STEP 4. 운명의 인연 장소 & 웹툰 일러스트 엿보기</span>
             <span style="font-size:12px; color:#ffd700; background:rgba(255,215,0,0.1); padding:2px 8px; border-radius:10px;">최종 단계</span>
           </div>
 
@@ -500,15 +543,15 @@
           </p>
 
           <div style="background:#1b1f33; border:1px solid rgba(212,175,55,0.4); border-radius:18px; padding:20px; text-align:center;">
-            <div style="font-size:13.5px; color:#ffd700; font-weight:800; margin-bottom:10px;">✦ 사주 그릇에 봉인되어 있는 운명의 인연 기운</div>
-            <div class="teaser-silhouette-wrap">
-              <div class="mystic-glow-symbol">✦</div>
+            <div style="font-size:13.5px; color:#ffd700; font-weight:800; margin-bottom:10px;">✦ 사주 그릇에 맺혀 있는 운명 인연 웹툰 일러스트</div>
+            <div class="teaser-tooon-wrap">
+              ${partnerToon}
             </div>
             <p style="color:#cbd5e1; font-size:13.5px; margin-bottom:8px;">
-              "오직 너의 사주에만 반응하는 특별한 인연의 결이 감지되었다."
+              "어때? 웹툰 감성 무드랑 스타일 딱 네 취향이지?"
             </p>
             <p style="color:#f5e49b; font-size:12.5px; margin:0;">
-              🔒 <b>이 사람의 모자이크 없는 선명한 원본 프로필과, 정확히 몇 월 며칠 몇 시에 부딪히는지</b>는 아래에서 바로 열어봐!
+              🔒 <b>이 사람의 상세 웹툰 캐릭터 프로필과, 정확히 몇 월 며칠 몇 시에 부딪히는지</b>는 아래에서 바로 열어봐!
             </p>
           </div>
         `;
