@@ -2,9 +2,9 @@
   "name": "today-destiny",
   "version": "1.0.0",
   "description": "Saju App",
-  "main": "src/server.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node src/server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
