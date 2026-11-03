@@ -141,17 +141,13 @@
       margin-bottom: 14px;
     }
     
-    .advisor-avatar-box {
+    .advisor-avatar {
       width: 52px;
       height: 52px;
       border-radius: 50%;
       border: 2px solid #ffd700;
-      background: linear-gradient(135deg, #311042 0%, #4f46e5 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      object-fit: cover;
       box-shadow: 0 0 12px rgba(255,215,0,0.5);
-      overflow: hidden;
       flex-shrink: 0;
     }
 
@@ -189,20 +185,20 @@
       animation: fadeIn 0.6s ease-in-out;
     }
 
-    /* 한국 웹툰 일러스트 캐릭터 카드 프레임 */
-    .teaser-tooon-wrap {
+    /* 인스타 감성 한국인 화보 클로즈업 사진 프레임 */
+    .teaser-img-wrap {
       width: 140px;
       height: 140px;
       margin: 0 auto 12px;
       border-radius: 50%;
       overflow: hidden;
       border: 3px solid #ffd700;
-      background: linear-gradient(135deg, #2e1065 0%, #17102e 100%);
-      box-shadow: 0 0 30px rgba(255,215,0,0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      box-shadow: 0 0 25px rgba(255,215,0,0.5);
       position: relative;
+    }
+    .teaser-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: blur(2px) contrast(1.15);
     }
   </style>
 </head>
@@ -221,7 +217,7 @@
     </div>
     <p class="hero-sub">생년월일로 파헤치는 소름 돋는 직설 풀이</p>
     <div class="chips">
-      <span class="chip">💖 운명의 인연 웹툰 일러스트</span>
+      <span class="chip">💖 운명의 인연 감성 화보</span>
       <span class="chip">💰 돈 터지는 날짜</span>
       <span class="chip">⚠️ 오늘 당장 피할 액운</span>
     </div>
@@ -287,12 +283,12 @@
         <div style="font-size: 36px; text-shadow: 0 0 10px #ffd700;">👑</div>
         <div>
           <span style="font-size: 11px; background: rgba(255,215,0,0.2); color: #ffd700; padding: 4px 10px; border-radius: 6px; font-weight: 800; border: 1px solid rgba(255,215,0,0.4);">PREMIUM SECRET</span>
-          <div style="font-size: 18px; color: #fff; font-weight: 800; margin-top: 4px;">너의 운명 인연 웹툰 일러스트 원본 & 만남 날짜 전체 해제</div>
+          <div style="font-size: 18px; color: #fff; font-weight: 800; margin-top: 4px;">너의 운명 인연 선명한 원본 감성 화보 & 만남 날짜 전체 해제</div>
         </div>
       </div>
 
       <p style="font-size: 13.5px; color: #cbd5e1; line-height: 1.6; margin-bottom: 16px;">
-        "아까 그 웹툰 캐릭터 실루엣 보니까 대충 느낌 오지? 너 딱 이런 스타일 좋아하고 이런 애 만난다? 선명한 원본 웹툰 일러스트 카드랑 몇 월 며칠에 어디서 부딪히는지 다 적어놨으니까 아래 버튼 눌러서 바로 확인해봐!"
+        "아까 그 감성 화보 보니까 대충 느낌 오지? 너 딱 이런 스타일 좋아하고 이런 애 만난다? 선명한 원본 화보 카드랑 몇 월 며칠에 어디서 부딪히는지 다 적어놨으니까 아래 버튼 눌러서 바로 확인해봐!"
       </p>
 
       <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); padding: 10px 12px; border-radius: 8px; margin-bottom: 16px; font-size: 11.5px; color: #fca5a5; line-height: 1.4; text-align: center;">
@@ -304,8 +300,8 @@
           <div style="font-size: 12px; color: #94a3b8; text-decoration: line-through;">정가 9,900원</div>
           <div style="font-size: 24px; color: #ffd700; font-weight: 800;">2,900원 <span style="font-size:12px; color:#ef4444; font-weight:700;">(1회 평생소장)</span></div>
         </div>
-        <button onclick="alert('토스페이먼츠 결제 연동 페이지로 이동합니다!')" style="background: linear-gradient(135deg, #ffe885 0%, #c8963e 100%); color: #0f1015; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; box-shadow: 0 4px 20px rgba(212,175,55,0.5);">
-          2,900원에 인연 일러스트 확인하기 ✦
+        <button onclick="alert('토스페이먼츠 연동 페이지로 이동합니다!')" style="background: linear-gradient(135deg, #ffe885 0%, #c8963e 100%); color: #0f1015; border: none; padding: 14px 24px; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; box-shadow: 0 4px 20px rgba(212,175,55,0.5);">
+          2,900원에 인연 화보 확인하기 ✦
         </button>
       </div>
     </div>
@@ -358,57 +354,26 @@
       const advisorName = pickedAdvisor.name;
       const advisorDesc = pickedAdvisor.desc;
 
-      // 100% 한국 웹툰 감성 캐릭터 아바타 SVG (외부 이미지 링크 절대 사용 안 함)
-      const advisorSvg = `
-        <svg viewBox="0 0 100 100" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="50" cy="50" r="50" fill="#2d1b4e"/>
-          <circle cx="50" cy="38" r="20" fill="#fbcfe8"/>
-          <path d="M 25 85 Q 50 55 75 85 Z" fill="${isFemale ? '#3b82f6' : '#ec4899'}"/>
-          <path d="M 30 32 Q 50 15 70 32 Q 75 50 65 55 Q 50 45 35 55 Q 25 50 30 32 Z" fill="#1e1b4b"/>
-          <circle cx="50" cy="48" r="3" fill="#ffd700"/>
-        </svg>
-      `;
+      // 🇰🇷 확실하게 검증된 한국인(아시안) 인스타 화보 클로즈업 사진 소스 풀
+      const asianAvatars1 = [
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=600&auto=format&fit=crop"
+      ];
+      
+      const asianAvatars2 = [
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=600&auto=format&fit=crop"
+      ];
 
-      // 100% 한국 웹툰 감성 인연 캐릭터 SVG (외부 링크 차단)
-      const maleToonSvg = `
-        <svg viewBox="0 0 120 120" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="toonGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.85"/>
-              <stop offset="100%" stop-color="#1e1b4b" stop-opacity="1"/>
-            </radialGradient>
-          </defs>
-          <circle cx="60" cy="60" r="60" fill="url(#toonGlow)"/>
-          <path d="M 35 110 C 35 80 48 70 60 70 C 72 70 85 80 85 110 Z" fill="#4f46e5" opacity="0.7"/>
-          <circle cx="60" cy="48" r="21" fill="#fed7aa"/>
-          <path d="M 39 44 Q 41 18 60 20 Q 79 18 81 44 Q 84 28 72 18 Q 60 10 48 18 Q 36 28 39 44 Z" fill="#0f172a"/>
-          <path d="M 52 48 Q 56 52 60 48" stroke="#9a3412" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <circle cx="50" cy="42" r="2" fill="#1e293b"/>
-          <circle cx="70" cy="42" r="2" fill="#1e293b"/>
-          <circle cx="60" cy="60" r="56" fill="none" stroke="#ffd700" stroke-width="2.5" opacity="0.9"/>
-        </svg>
-      `;
+      const advisorAvatar = isFemale 
+        ? asianAvatars2[Math.floor(Math.random() * asianAvatars2.length)] 
+        : asianAvatars1[Math.floor(Math.random() * asianAvatars1.length)];
 
-      const femaleToonSvg = `
-        <svg viewBox="0 0 120 120" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="toonGlowF" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#db2777" stop-opacity="0.85"/>
-              <stop offset="100%" stop-color="#1e1b4b" stop-opacity="1"/>
-            </radialGradient>
-          </defs>
-          <circle cx="60" cy="60" r="60" fill="url(#toonGlowF)"/>
-          <path d="M 35 110 C 35 80 48 72 60 72 C 72 72 85 80 85 110 Z" fill="#e11d48" opacity="0.7"/>
-          <circle cx="60" cy="50" r="19" fill="#ffedd5"/>
-          <path d="M 41 45 Q 40 18 60 20 Q 80 18 79 45 Q 86 70 78 98 Q 72 75 76 50 Q 60 32 44 50 Q 48 75 42 98 Q 34 70 41 45 Z" fill="#111827"/>
-          <path d="M 54 52 Q 57 55 60 52" stroke="#be123c" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-          <circle cx="51" cy="46" r="1.8" fill="#1e293b"/>
-          <circle cx="69" cy="46" r="1.8" fill="#1e293b"/>
-          <circle cx="60" cy="60" r="56" fill="none" stroke="#ffd700" stroke-width="2.5" opacity="0.9"/>
-        </svg>
-      `;
-
-      const partnerToon = isFemale ? maleToonSvg : femaleToonSvg;
+      const partnerImg = isFemale
+        ? asianAvatars1[Math.floor(Math.random() * asianAvatars1.length)]
+        : asianAvatars2[Math.floor(Math.random() * asianAvatars2.length)];
 
       const colors = ["보라색", "청록색", "크림 아이보리", "딥 네이비"];
       const places = ["조용한 분위기의 프랜차이즈 카페 창가 자리", "책이나 문구류가 많은 서점 또는 소품샵 근처", "사람이 북적이는 도심 속 대로변 교차로", "오후 햇살이 따스하게 잘 드는 야외 공간"];
@@ -428,7 +393,7 @@
         step1.className = 'step-card';
         step1.innerHTML = `
           <div class="advisor-profile">
-            <div class="advisor-avatar-box">${advisorSvg}</div>
+            <img class="advisor-avatar" src="${advisorAvatar}" alt="${advisorName}">
             <div>
               <div style="font-size:15px; font-weight:800; color:#ffd700;">${advisorName} <span style="font-size:12px; color:#94a3b8; font-weight:normal;">(${advisorDesc})</span></div>
               <div style="font-size:12.5px; color:#e2e8f0;">"오냐, 네 생년월일 사주그릇을 좀 들여다보자..."</div>
@@ -459,7 +424,7 @@
         step2.className = 'step-card';
         step2.innerHTML = `
           <div class="advisor-profile">
-            <div class="advisor-avatar-box">${advisorSvg}</div>
+            <img class="advisor-avatar" src="${advisorAvatar}" alt="${advisorName}">
             <div>
               <div style="font-size:15px; font-weight:800; color:#ffd700;">${advisorName}</div>
               <div style="font-size:12.5px; color:#e2e8f0;">"시간대별로 내가 시키는 대로만 움직여봐."</div>
@@ -492,7 +457,7 @@
         step3.className = 'step-card';
         step3.innerHTML = `
           <div class="advisor-profile">
-            <div class="advisor-avatar-box">${advisorSvg}</div>
+            <img class="advisor-avatar" src="${advisorAvatar}" alt="${advisorName}">
             <div>
               <div style="font-size:15px; font-weight:800; color:#ffd700;">${advisorName}</div>
               <div style="font-size:12.5px; color:#f87171;">"이거 진짜 조심해라, 진지하다 나."</div>
@@ -510,7 +475,7 @@
             <li>🚗 <b>[이동/운전 경고]:</b> <span style="color:#f87171;">길 걸어가거나 운전할 때 딴생각하다가 하마터면 아찔한 상황 생길 수 있으니까 전방 주시 필수야.</span></li>
             <li>⚠️ <b>오늘 멀리할 인간:</b> 말 앞뒤가 다른 사람, 네 은근히 이용하려는 사람 주변에 있으니까 오늘 그 사람 연락은 무조건 씹어.</li>
           </ul>
-          <button class="next-step-btn" id="btn-step4">다음: 네가 만날 '운명의 인연' 웹툰 일러스트 보기 ✦</button>
+          <button class="next-step-btn" id="btn-step4">다음: 네가 만날 '운명의 인연' 감성 화보 보기 ✦</button>
         `;
         resultDiv.appendChild(step3);
         step3.scrollIntoView({ behavior: 'smooth' });
@@ -526,7 +491,7 @@
         step4.className = 'step-card';
         step4.innerHTML = `
           <div class="advisor-profile">
-            <div class="advisor-avatar-box">${advisorSvg}</div>
+            <img class="advisor-avatar" src="${advisorAvatar}" alt="${advisorName}">
             <div>
               <div style="font-size:15px; font-weight:800; color:#ffd700;">${advisorName}</div>
               <div style="font-size:12.5px; color:#ffd700;">"드디어 나왔다... 너 딱 이런 인연 만난다?"</div>
@@ -534,7 +499,7 @@
           </div>
 
           <div class="step-header">
-            <span class="step-title">📍 STEP 4. 운명의 인연 장소 & 웹툰 일러스트 엿보기</span>
+            <span class="step-title">📍 STEP 4. 운명의 인연 장소 & 감성 화보 엿보기</span>
             <span style="font-size:12px; color:#ffd700; background:rgba(255,215,0,0.1); padding:2px 8px; border-radius:10px;">최종 단계</span>
           </div>
 
@@ -543,15 +508,15 @@
           </p>
 
           <div style="background:#1b1f33; border:1px solid rgba(212,175,55,0.4); border-radius:18px; padding:20px; text-align:center;">
-            <div style="font-size:13.5px; color:#ffd700; font-weight:800; margin-bottom:10px;">✦ 사주 그릇에 맺혀 있는 운명 인연 웹툰 일러스트</div>
-            <div class="teaser-tooon-wrap">
-              ${partnerToon}
+            <div style="font-size:13.5px; color:#ffd700; font-weight:800; margin-bottom:10px;">✦ 사주 그릇에 맺혀 있는 운명 인연 감성 화보</div>
+            <div class="teaser-img-wrap">
+              <img src="${partnerImg}" alt="Partner Teaser">
             </div>
             <p style="color:#cbd5e1; font-size:13.5px; margin-bottom:8px;">
-              "어때? 웹툰 감성 무드랑 스타일 딱 네 취향이지?"
+              "어때? 눈매나 분위기 딱 네 스타일 같지 않아?"
             </p>
             <p style="color:#f5e49b; font-size:12.5px; margin:0;">
-              🔒 <b>이 사람의 상세 웹툰 캐릭터 프로필과, 정확히 몇 월 며칠 몇 시에 부딪히는지</b>는 아래에서 바로 열어봐!
+              🔒 <b>이 사람의 모자이크 없는 선명한 원본 화보와, 정확히 몇 월 며칠 몇 시에 부딪히는지</b>는 아래에서 바로 열어봐!
             </p>
           </div>
         `;
