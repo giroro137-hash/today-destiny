@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>시크릿 운명 리포트 - 도사와 선녀의 1:1 직설 점사</title>
+  <title>시크릿 운명 리포트 - 맞춤 1:1 직설 점사</title>
   <style>
     :root {
       --bg: #07080e;
@@ -96,10 +96,10 @@
     }
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-    /* 성별 선택 스타일 */
+    /* 깔끔한 성별 선택 버튼 */
     .gender-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
     .gender-btn {
-      padding: 13px; border-radius: 12px; border: 1px solid #2a2d42; background: #191c2e; color: #94a3b8; font-size: 14px; font-weight: 700; text-align: center; cursor: pointer; transition: all 0.2s;
+      padding: 13px; border-radius: 12px; border: 1px solid #2a2d42; background: #191c2e; color: #94a3b8; font-size: 14.5px; font-weight: 700; text-align: center; cursor: pointer; transition: all 0.2s;
     }
     .gender-btn.active {
       border-color: #ffd700; background: rgba(255,215,0,0.15); color: #ffd700; box-shadow: 0 0 12px rgba(255,215,0,0.3);
@@ -119,7 +119,7 @@
 
     #result { margin-top: 25px; }
 
-    /* 단계별 카드 & 도사 프로필 */
+    /* 카드 및 프로필 스타일 */
     .step-card {
       background: rgba(19, 22, 37, 0.95);
       border: 1px solid rgba(212, 175, 55, 0.35);
@@ -131,7 +131,7 @@
     }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    .bosal-profile {
+    .advisor-profile {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -141,13 +141,13 @@
       border-radius: 16px;
       margin-bottom: 14px;
     }
-    .bosal-avatar {
-      width: 48px;
-      height: 48px;
+    .advisor-avatar {
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
       border: 2px solid #ffd700;
       object-fit: cover;
-      box-shadow: 0 0 10px rgba(255,215,0,0.5);
+      box-shadow: 0 0 12px rgba(255,215,0,0.5);
     }
 
     .step-header {
@@ -175,7 +175,6 @@
       transition: all 0.2s;
     }
 
-    /* 유료 결제 카드 */
     .premium-preview {
       margin-top: 30px; border: 1.5px solid #ffd700; border-radius: 22px;
       background: linear-gradient(165deg, rgba(29, 27, 46, 0.95) 0%, rgba(13, 14, 23, 0.95) 100%);
@@ -197,25 +196,25 @@
     }
     .teaser-img-wrap img {
       width: 100%; height: 100%; object-fit: cover;
-      filter: blur(4.5px) contrast(1.1);
+      filter: blur(5px) contrast(1.1);
     }
   </style>
 </head>
 <body>
 
   <div class="timer-banner">
-    🔥 [신통방통 직설 점사] 잘생긴 도사 & 매혹적인 선녀의 1:1 비밀 귓속말
+    🔥 [신통방통 직설 점사] 비밀 운명 리포트
   </div>
 
   <div class="hero">
     <div class="hero-card">
-      <img src="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=1000&auto=format&fit=crop" alt="Cosmic Destiny">
+      <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop" alt="Cosmic Destiny">
       <div class="hero-card-overlay">
         <div class="badge">✦ SECRET DESTINY ✦</div>
         <h1>오늘, 너의 운명은<br>어떤 밀어를 숨기고 있을까?</h1>
       </div>
     </div>
-    <p class="hero-sub">생년월일로 파헤치는 도사와 선녀의 소름 돋는 직설 풀이</p>
+    <p class="hero-sub">생년월일로 파헤치는 소름 돋는 직설 풀이</p>
     <div class="chips">
       <span class="chip">💖 운명의 인연 얼굴</span>
       <span class="chip">💰 돈 터지는 날짜</span>
@@ -229,8 +228,8 @@
       <form id="form">
         <label>성별 선택</label>
         <div class="gender-group">
-          <div class="gender-btn active" id="g-female" onclick="selectGender('female')">🙋‍♀️ 여성 (잘생긴 도사)</div>
-          <div class="gender-btn" id="g-male" onclick="selectGender('male')">🙋‍♂️ 남성 (예쁜 선녀)</div>
+          <div class="gender-btn active" id="g-female" onclick="selectGender('female')">여성</div>
+          <div class="gender-btn" id="g-male" onclick="selectGender('male')">남성</div>
         </div>
         <input type="hidden" id="gender" value="female">
 
@@ -270,11 +269,11 @@
           <span>[필수] 만 14세 이상이며, <a href="/privacy.html" target="_blank">개인정보·이용약관</a> 및 <b style="color:#ffd700;">디지털 콘텐츠 환불 불가 규정</b> 동의<small style="display:block; color:#666; margin-top:2px;">입력된 정보는 서버에 저장되지 않고 즉시 폐기됩니다.</small></span>
         </label>
 
-        <button type="submit" class="btn">도사/선녀에게 점사 엿보기 ✦</button>
+        <button type="submit" class="btn">점사 엿보기 ✦</button>
       </form>
     </div>
 
-    <!-- 단계별 몰입형 결과 영역 -->
+    <!-- 단계별 결과 영역 -->
     <div id="result"></div>
 
     <!-- 최종 유료 결제 카드 -->
@@ -287,8 +286,8 @@
         </div>
       </div>
 
-      <p style="font-size: 13.5px; color: #cbd5e1; line-height: 1.6; margin-bottom: 16px;" id="premium-msg">
-        "아까 그 실루엣 보니까 대충 감 오지? <b style="color:#ffd700;">너 딱 이런 애 만난다?</b> 선명한 얼굴 원본이랑 몇 월 며칠에 어디서 부딪히는지 다 적어놨으니까 확인해봐."
+      <p style="font-size: 13.5px; color: #cbd5e1; line-height: 1.6; margin-bottom: 16px;">
+        "아까 그 실루엣 보니까 대충 느낌 오지? 너 딱 이런 스타일 좋아하고 이런 애 만난다? 선명한 얼굴 원본이랑 몇 월 며칠에 어디서 부딪히는지 다 적어놨으니까 아래 버튼 눌러서 바로 확인해봐!"
       </p>
 
       <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); padding: 10px 12px; border-radius: 8px; margin-bottom: 16px; font-size: 11.5px; color: #fca5a5; line-height: 1.4; text-align: center;">
@@ -328,19 +327,28 @@
       const gender = document.getElementById('gender').value;
 
       const isFemale = gender === 'female';
+      // 여성 선택시 멋진 도사, 남성 선택시 예쁜 선녀가 풀이
       const advisorName = isFemale ? "청송 도사" : "월하 선녀";
-      const advisorDesc = isFemale ? "속마음을 꿰뚫어 보는 잘생긴 도사" : "인연의 끈을 당겨주는 아리따운 선녀";
-      const advisorAvatar = isFemale 
-        ? "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300&auto=format&fit=crop"  
-        : "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300&auto=format&fit=crop"; 
+      const advisorDesc = isFemale ? "속마음을 꿰뚫어 보는 도사" : "인연의 끈을 당겨주는 선녀";
 
-      // 상대방 일러스트 (여성용: 훈남 웹툰, 남성용: 예쁜 여신 웹툰)
+      const maleAvatars = [
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300&auto=format&fit=crop"
+      ];
+      const femaleAvatars = [
+        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=300&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=300&auto=format&fit=crop"
+      ];
+      // 여성 선택시 멋진 남성 도사 프로필, 남성 선택시 예쁜 여성 선녀 프로필
+      const advisorAvatar = isFemale ? maleAvatars[0] : femaleAvatars[0];
+
+      // 여성 사용자에겐 멋진 남성 인연, 남성 사용자에겐 예쁜 여성 인연 노출
       const partnerImg = isFemale
         ? "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop"
         : "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1000&auto=format&fit=crop";
 
       const colors = ["보라색", "청록색", "크림 아이보리", "딥 네이비"];
-      const places = ["조용한 카페 창가 자리", "책이 가득한 서점 주변", "도심 속 사람이 북적이는 거리", "햇살이 잘 드는 야외 공원"];
+      const places = ["조용한 분위기의 프랜차이즈 카페 창가 자리", "책이나 문구류가 많은 서점 또는 소품샵 근처", "사람이 북적이는 도심 속 대로변 교차로", "오후 햇살이 따스하게 잘 드는 야외 공간"];
       
       const randomColor = colors[Math.floor(Math.random() * colors.length)];
       const randomPlace = places[Math.floor(Math.random() * places.length)];
@@ -356,8 +364,8 @@
         const step1 = document.createElement('div');
         step1.className = 'step-card';
         step1.innerHTML = `
-          <div class="bosal-profile">
-            <img class="bosal-avatar" src="${advisorAvatar}" alt="${advisorName}">
+          <div class="advisor-profile">
+            <img class="advisor-avatar" src="${advisorAvatar}" alt="${advisorName}">
             <div>
               <div style="font-size:15px; font-weight:800; color:#ffd700;">${advisorName} <span style="font-size:12px; color:#94a3b8; font-weight:normal;">(${advisorDesc})</span></div>
               <div style="font-size:12.5px; color:#e2e8f0;">"오냐, 네 생년월일 사주그릇을 좀 들여다보자..."</div>
@@ -370,8 +378,8 @@
           </div>
           
           <p style="color:#d1d5db; font-size:14.5px; line-height:1.7;">
-            <b>${birth}</b> 태생인 너 말이야... 겉으로는 아무렇지 않은 척 쿨한 체 해도, 속으로는 혼자 엄청 끙끙대고 자존심 세우는 스타일이지[cite: 7]?<br><br>
-            사람들한테 상처받아놓고도 티 안 내려고 웃고 있는 그 기운이 사주에 딱 잡힌다. 근데 기뻐해라. 네 그 묵은 답답함이 <b>오늘 오후 2시~7시 사이</b>에 거짓말처럼 풀리는 대운의 물꼬가 트인다[cite: 7]!
+            <b>${birth}</b> 태생인 너 말이야... 겉으로는 아무렇지 않은 척 쿨한 체 해도, 속으로는 혼자 엄청 끙끙대고 자존심 세우는 스타일이지?<br><br>
+            사람들한테 상처받아놓고도 티 안 내려고 웃고 있는 그 기운이 사주에 딱 잡힌다. 근데 기뻐해라. 네 그 묵은 답답함이 <b>오늘 오후 2시~7시 사이</b>에 거짓말처럼 풀리는 대운의 물꼬가 트인다!
           </p>
           <button class="next-step-btn" id="btn-step2">다음: 오늘 시간대별로 뭘 조심해야 하는지 보기 ✦</button>
         `;
@@ -387,8 +395,8 @@
         const step2 = document.createElement('div');
         step2.className = 'step-card';
         step2.innerHTML = `
-          <div class="bosal-profile">
-            <img class="bosal-avatar" src="${advisorAvatar}" alt="${advisorName}">
+          <div class="advisor-profile">
+            <img class="advisor-avatar" src="${advisorAvatar}" alt="${advisorName}">
             <div>
               <div style="font-size:15px; font-weight:800; color:#ffd700;">${advisorName}</div>
               <div style="font-size:12.5px; color:#e2e8f0;">"시간대별로 내가 시키는 대로만 움직여봐."</div>
@@ -396,13 +404,13 @@
           </div>
 
           <div class="step-header">
-            <span class="step-title">⏰ STEP 2. 도사/선녀의 시간대별 맞춤 밀착 가이드</span>
+            <span class="step-title">⏰ STEP 2. 시간대별 맞춤 밀착 가이드</span>
             <span style="font-size:12px; color:#ffd700; background:rgba(255,215,0,0.1); padding:2px 8px; border-radius:10px;">2단계</span>
           </div>
 
           <div style="font-size:13.5px; color:#cbd5e1; line-height:1.8; background:#1b1f33; padding:16px; border-radius:12px;">
             <p><b>• 오전 08:30 ~ 11:30 :</b> 마음이 조급해져서 이것저것 벌이지 마. 오전엔 그냥 조용히 숨 고르는 게 이득이야.</p>
-            <p><b>• 오후 12:30 ~ 03:30 (황금 시간) :</b> 네게 득이 되는 연락이나 기회가 이 시간에 들어와. 이때 <span style="color:#ffd700; font-weight:700;">${randomColor}</span> 계열을 몸에 지니고 있으면 사람 복이 확 붙는다[cite: 7]!</p>
+            <p><b>• 오후 12:30 ~ 03:30 (황금 시간) :</b> 네게 득이 되는 연락이나 기회가 이 시간에 들어와. 이때 <span style="color:#ffd700; font-weight:700;">${randomColor}</span> 계열을 몸에 지니고 있으면 사람 복이 확 붙는다!</p>
             <p><b>• 저녁 07:00 이후 :</b> 괜히 쓸데없는 약속 나가서 기빨리지 말고 집에 들어가서 푹 쉬어라. 그게 재물운 지키는 법이야.</p>
           </div>
           <button class="next-step-btn" id="btn-step3">다음: 오늘 소름 돋는 '액운 경고' 확인하기 ✦</button>
@@ -420,8 +428,8 @@
         const step3 = document.createElement('div');
         step3.className = 'step-card';
         step3.innerHTML = `
-          <div class="bosal-profile">
-            <img class="bosal-avatar" src="${advisorAvatar}" alt="${advisorName}">
+          <div class="advisor-profile">
+            <img class="advisor-avatar" src="${advisorAvatar}" alt="${advisorName}">
             <div>
               <div style="font-size:15px; font-weight:800; color:#ffd700;">${advisorName}</div>
               <div style="font-size:12.5px; color:#f87171;">"이거 진짜 조심해라, 진지하다 나."</div>
@@ -437,7 +445,7 @@
             <li>🎨 <b>오늘의 행운 색상:</b> <span style="color:#f5e49b; font-weight:700;">${randomColor}</span></li>
             <li>💧 <b>[물 조심 경고]:</b> <span style="color:#f87171;">오늘 오후에 음료수나 물 마실 때 칠칠맞게 폰이나 옷에 쏟아서 짜증 날 일 생기니까 정신 똑바로 차려!</span></li>
             <li>🚗 <b>[이동/운전 경고]:</b> <span style="color:#f87171;">길 걸어가거나 운전할 때 딴생각하다가 하마터면 아찔한 상황 생길 수 있으니까 전방 주시 필수야.</span></li>
-            <li>⚠️ <b>오늘 멀리할 인간:</b> 말 앞뒤가 다른 사람, 네 은근히 이용하려는 사람 주변에 있으니까 오늘 그 사람 연락은 무조건 씹어[cite: 7].</li>
+            <li>⚠️ <b>오늘 멀리할 인간:</b> 말 앞뒤가 다른 사람, 네 은근히 이용하려는 사람 주변에 있으니까 오늘 그 사람 연락은 무조건 씹어.</li>
           </ul>
           <button class="next-step-btn" id="btn-step4">다음: 네가 만날 '운명의 인연' 실루엣 보기 ✦</button>
         `;
@@ -454,11 +462,11 @@
         const step4 = document.createElement('div');
         step4.className = 'step-card';
         step4.innerHTML = `
-          <div class="bosal-profile">
-            <img class="bosal-avatar" src="${advisorAvatar}" alt="${advisorName}">
+          <div class="advisor-profile">
+            <img class="advisor-avatar" src="${advisorAvatar}" alt="${advisorName}">
             <div>
               <div style="font-size:15px; font-weight:800; color:#ffd700;">${advisorName}</div>
-              <div style="font-size:12.5px; color:#ffd700;">"드디어 나왔다... 너 얘 만난다[cite: 7]?"</div>
+              <div style="font-size:12.5px; color:#ffd700;">"드디어 나왔다... 너 딱 이런 애 만난다?"</div>
             </div>
           </div>
 
@@ -468,7 +476,7 @@
           </div>
 
           <p style="color:#d1d5db; font-size:14px; line-height:1.7; margin-bottom:16px;">
-            너 오늘 <b style="color:#ffd700;">${randomPlace}</b> 근처 지나치게 될 거야. 거기서 우연히 스쳐 지나가는 사람 꼭 눈여겨봐라. 네 사주줄에 이 사람 기운이 강하게 묶여있거든[cite: 7]?
+            너 오늘 <b style="color:#ffd700;">${randomPlace}</b> 근처 지나치게 될 거야. 거기서 우연히 스쳐 지나가는 사람 꼭 눈여겨봐라. 네 사주줄에 이 사람 기운이 강하게 묶여있거든?
           </p>
 
           <div style="background:#1b1f33; border:1px solid rgba(212,175,55,0.4); border-radius:18px; padding:20px; text-align:center;">
@@ -477,10 +485,10 @@
               <img src="${partnerImg}" alt="Partner Teaser">
             </div>
             <p style="color:#cbd5e1; font-size:13.5px; margin-bottom:8px;">
-              "어때[cite: 7]? 눈매나 분위기 딱 네 스타일 같지 않아[cite: 7]?"
+              "어때? 눈매나 분위기 딱 네 스타일 같지 않아?"
             </p>
             <p style="color:#f5e49b; font-size:12.5px; margin:0;">
-              🔒 <b>이 사람의 모자이크 없는 선명한 웹툰 얼굴 원본과, 정확히 몇 월 며칠 몇 시에 부딪히는지</b>는 아래에서 바로 열어봐[cite: 7]!
+              🔒 <b>이 사람의 모자이크 없는 선명한 웹툰 얼굴 원본과, 정확히 몇 월 며칠 몇 시에 부딪히는지</b>는 아래에서 바로 열어봐!
             </p>
           </div>
         `;
