@@ -194,7 +194,8 @@
     }
     .teaser-img-wrap img {
       width: 100%; height: 100%; object-fit: cover;
-      filter: blur(6px) contrast(1.1);
+      /* 블러를 더 은은하게 줄여서 이목구비와 눈매가 확실히 보이도록 수정 */
+      filter: blur(1.8px) contrast(1.2);
     }
   </style>
 </head>
@@ -326,27 +327,26 @@
 
       const isFemale = gender === 'female';
       
-      // 🔮 다채로운 선녀 & 도사 이름 및 수식어 풀
+      // 🔮 다채로운 선녀 & 도사 이름 풀 (문제의 '은하선녀' 포함 이상한 이미지 나오는 이름들 전면 재정비)
       const sunyeoNames = [
-        { name: "월하 선녀", desc: "인연의 붉은 실을 맺어주는 선녀" },
-        { name: "천상 선녀", desc: "속마음을 환하게 비추는 선녀" },
-        { name: "백호 선녀", desc: "액운을 날카롭게 막아주는 선녀" },
-        { name: "은하 선녀", desc: "운명의 길을 열어주는 선녀" },
-        { name: "자경 선녀", desc: "비밀을 직설적으로 파헤치는 선녀" },
-        { name: "수련 선녀", desc: "사주 그릇을 들여다보는 선녀" }
+        { name: "초원 선녀", desc: "인연의 붉은 실을 맺어주는 선녀" },
+        { name: "예린 선녀", desc: "속마음을 환하게 비추는 선녀" },
+        { name: "서아 선녀", desc: "액운을 날카롭게 막아주는 선녀" },
+        { name: "하윤 선녀", desc: "운명의 길을 열어주는 선녀" },
+        { name: "도희 선녀", desc: "비밀을 직설적으로 파헤치는 선녀" },
+        { name: "채원 선녀", desc: "사주 그릇을 들여다보는 선녀" }
       ];
 
       const dosaNames = [
-        { name: "청송 도사", desc: "속마음을 꿰뚫어 보는 훈남 도사" },
-        { name: "혜안 도사", desc: "운명의 시기를 정확히 보는 도사" },
-        { name: "천궁 도사", desc: "오늘의 대운을 짚어내는 도사" },
-        { name: "무극 도사", desc: "서늘한 직설 경고를 날리는 도사" },
-        { name: "용담 도사", desc: "귀인운을 단번에 끌어당기는 도사" },
-        { name: "자운 도사", desc: "돈과 사람 복을 터뜨려주는 도사" }
+        { name: "도윤 도사", desc: "속마음을 꿰뚫어 보는 훈남 도사" },
+        { name: "시우 도사", desc: "운명의 시기를 정확히 보는 도사" },
+        { name: "주원 도사", desc: "오늘의 대운을 짚어내는 도사" },
+        { name: "민준 도사", desc: "서늘한 직설 경고를 날리는 도사" },
+        { name: "서준 도사", desc: "귀인운을 단번에 끌어당기는 도사" },
+        { name: "현우 도사", desc: "돈과 사람 복을 터뜨려주는 도사" }
       ];
 
-      // 🇰🇷 여성 선택 시: 도사 상담원 + 상단 훈남 아바타 풀 A
-      // 🇰🇷 남성 선택 시: 선녀 상담원 + 상단 청순/도도 여성 아바타 풀 B
+      // 📌 성별 매칭 완벽 고정 (여성 선택 시 훈남 '도사', 남성 선택 시 예쁜 '선녀')
       const pickedAdvisor = isFemale 
         ? dosaNames[Math.floor(Math.random() * dosaNames.length)] 
         : sunyeoNames[Math.floor(Math.random() * sunyeoNames.length)];
@@ -354,43 +354,37 @@
       const advisorName = pickedAdvisor.name;
       const advisorDesc = pickedAdvisor.desc;
 
-      // 상단 점사관 전용 한국인 프로필 이미지 풀 (철저히 엄선된 아시안 훈남/훈녀)
+      // 🇰🇷 [상단 프로필 전용] 엄선된 한국인 감성 클로즈업 포토 풀 (이상한 사진 완전 배제)
       const dosaAvatars = [
-        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=600&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=600&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=600&auto=format&fit=crop"
+        "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=600&auto=format&fit=crop"
       ];
       
       const sunyeoAvatars = [
         "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=600&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=600&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=600&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=600&auto=format&fit=crop"
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=600&auto=format&fit=crop"
       ];
 
-      // 💖 [하단 STEP 4 인연 실루엣 전용] 상단 프로필과 완전히 다른 별도의 한국인 화보 풀 (절대 안 겹침)
+      // 💖 [하단 STEP 4 인연 실루엣 전용] 얼굴과 이목구비가 선명하게 보이는 한국인 클로즈업 화보 풀 (상단과 100% 분리)
       const malePartners = [
-        "https://images.unsplash.com/photo-1480429370139-e0132c086e2a?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1534188753412-3e26d1d618d3?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop"
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1480429370139-e0132c086e2a?q=80&w=800&auto=format&fit=crop"
       ];
 
       const femalePartners = [
         "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop"
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=800&auto=format&fit=crop"
       ];
 
-      // 상단 프로필 사진과 하단 인연 사진이 각각 독립적으로 추출되도록 분리
+      // 상단 프로필과 하단 실루엣이 각각 독립적으로 추출되도록 설정
       const advisorAvatar = isFemale 
         ? dosaAvatars[Math.floor(Math.random() * dosaAvatars.length)] 
         : sunyeoAvatars[Math.floor(Math.random() * sunyeoAvatars.length)];
