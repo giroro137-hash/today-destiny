@@ -1,0 +1,7 @@
+body{margin:0;background:#0c1022;color:#fff4dc;font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.75;word-break:keep-all;overflow-wrap:break-word}
+main{max-width:720px;margin:auto;padding:24px 18px 60px}
+a{color:#e8d29c}h1{font-size:24px}h2{font-size:17px;margin-top:28px;color:#e8d29c}
+p,li{color:#c6cbe0;font-size:14px}table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
+td,th{border:1px solid #3d3a5c;padding:8px;text-align:left;vertical-align:top;color:#c6cbe0}th{background:#191e36;color:#fff4dc}
+.todo{color:#ff9b9b;font-weight:700}.box{border:1px solid #c8a86d;background:#191e36;border-radius:12px;padding:12px 14px;margin:14px 0}
+nav{font-size:13px;margin-bottom:10px}nav a{margin-right:12px}
