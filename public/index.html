@@ -96,7 +96,6 @@
     }
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-    /* 깔끔한 성별 선택 버튼 */
     .gender-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
     .gender-btn {
       padding: 13px; border-radius: 12px; border: 1px solid #2a2d42; background: #191c2e; color: #94a3b8; font-size: 14.5px; font-weight: 700; text-align: center; cursor: pointer; transition: all 0.2s;
@@ -119,7 +118,6 @@
 
     #result { margin-top: 25px; }
 
-    /* 카드 및 프로필 스타일 */
     .step-card {
       background: rgba(19, 22, 37, 0.95);
       border: 1px solid rgba(212, 175, 55, 0.35);
@@ -287,7 +285,7 @@
       </div>
 
       <p style="font-size: 13.5px; color: #cbd5e1; line-height: 1.6; margin-bottom: 16px;">
-        "아까 그 실루엣 보니까 대충 느낌 오지? 너 딱 이런 스타일 좋아하고 이런 애 만난다? 선명한 얼굴 원본이랑 몇 월 며칠에 어디서 부딪히는지 다 적어놨으니까 아래 버튼 눌러서 바로 확인해봐!"
+        "아까 그 실루엣 보니까 대충 느낌 오지? 너 딱 이런 스타일 좋아하고 이런 애 만난다? 선명한 원본 얼굴이랑 몇 월 며칠에 어디서 부딪히는지 다 적어놨으니까 아래 버튼 눌러서 바로 확인해봐!"
       </p>
 
       <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); padding: 10px 12px; border-radius: 8px; margin-bottom: 16px; font-size: 11.5px; color: #fca5a5; line-height: 1.4; text-align: center;">
@@ -327,25 +325,44 @@
       const gender = document.getElementById('gender').value;
 
       const isFemale = gender === 'female';
-      // 여성 선택시 멋진 도사, 남성 선택시 예쁜 선녀가 풀이
+      
       const advisorName = isFemale ? "청송 도사" : "월하 선녀";
-      const advisorDesc = isFemale ? "속마음을 꿰뚫어 보는 도사" : "인연의 끈을 당겨주는 선녀";
+      const advisorDesc = isFemale ? "속마음을 꿰뚫어 보는 훈남 도사" : "인연의 끈을 당겨주는 아리따운 선녀";
 
-      const maleAvatars = [
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300&auto=format&fit=crop"
+      // 🌸 도사 프로필 아바타 (신비롭고 훈훈한 도사 화보 느낌)
+      const dosaAvatars = [
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=600&auto=format&fit=crop"
       ];
-      const femaleAvatars = [
-        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=300&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=300&auto=format&fit=crop"
+      
+      // 🌸 선녀 프로필 아바타 (보여주신 사진처럼 단아하고 예쁜 동양적 화보 느낌)[cite: 14]
+      const sunyeoAvatars = [
+        "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop"
       ];
-      // 여성 선택시 멋진 남성 도사 프로필, 남성 선택시 예쁜 여성 선녀 프로필
-      const advisorAvatar = isFemale ? maleAvatars[0] : femaleAvatars[0];
 
-      // 여성 사용자에겐 멋진 남성 인연, 남성 사용자에겐 예쁜 여성 인연 노출
+      // 💖 운명의 인연 실루엣 (여성 선택시 훈남, 남성 선택시 예쁜 선녀 화보 스타일)
+      const malePartners = [
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop"
+      ];
+
+      const femalePartners = [
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop"
+      ];
+
+      const advisorAvatar = isFemale 
+        ? dosaAvatars[Math.floor(Math.random() * dosaAvatars.length)] 
+        : sunyeoAvatars[Math.floor(Math.random() * sunyeoAvatars.length)];
+
       const partnerImg = isFemale
-        ? "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop"
-        : "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1000&auto=format&fit=crop";
+        ? malePartners[Math.floor(Math.random() * malePartners.length)]
+        : femalePartners[Math.floor(Math.random() * femalePartners.length)];
 
       const colors = ["보라색", "청록색", "크림 아이보리", "딥 네이비"];
       const places = ["조용한 분위기의 프랜차이즈 카페 창가 자리", "책이나 문구류가 많은 서점 또는 소품샵 근처", "사람이 북적이는 도심 속 대로변 교차로", "오후 햇살이 따스하게 잘 드는 야외 공간"];
@@ -488,7 +505,7 @@
               "어때? 눈매나 분위기 딱 네 스타일 같지 않아?"
             </p>
             <p style="color:#f5e49b; font-size:12.5px; margin:0;">
-              🔒 <b>이 사람의 모자이크 없는 선명한 웹툰 얼굴 원본과, 정확히 몇 월 며칠 몇 시에 부딪히는지</b>는 아래에서 바로 열어봐!
+              🔒 <b>이 사람의 모자이크 없는 선명한 원본 얼굴과, 정확히 몇 월 며칠 몇 시에 부딪히는지</b>는 아래에서 바로 열어봐!
             </p>
           </div>
         `;
