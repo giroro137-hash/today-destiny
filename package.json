@@ -1,6 +1,6 @@
 {
   "name": "today-destiny-mvp",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "scripts": {
     "start": "node src/server.js",
     "build:characters": "node scripts/build_characters.js",

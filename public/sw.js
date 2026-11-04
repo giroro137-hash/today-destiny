@@ -1,5 +1,5 @@
-const CACHE = 'destiny-shell-v3';
-const SHELL = ['/', '/manifest.webmanifest', '/icon.svg', '/business.js', '/legal.js', '/legal.css', '/characters/doryeong.png', '/characters/seonnyeo.png'];
+const CACHE = 'destiny-shell-v4';
+const SHELL = ['/', '/manifest.webmanifest', '/icon.svg', '/business.js', '/legal.js', '/legal.css', '/characters/doryeong.png', '/characters/seonnyeo.png', '/art/future-couple.webp'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));
 });
