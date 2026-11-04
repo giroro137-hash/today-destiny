@@ -109,20 +109,6 @@ function dayInfo(dm, myDayBranch, dateStr) {
   return { T, god, r, info, sc, avg: Math.round(sc.reduce((a, b) => a + b, 0) / 3) };
 }
 
-// 인연의 만남 접점은 단정적 예언이 아니라 성향별로 제안하는 현실적인 활동 아이디어입니다.
-const MEET_PROFILE = {
-  비견: { place: "친구의 생일 모임, 동료와의 식사, 지인 중심의 소규모 모임", scene: "공통 지인이 대화를 연결해 주거나 같은 관심사를 가진 사람끼리 자연스럽게 이야기를 나누는 상황", action: "소개를 받으면 부담스러운 기대보다 가벼운 대화부터 시작하고, 공통 관심사를 찾아보세요." },
-  겁재: { place: "운동 모임, 러닝 크루, 보드게임·스포츠 모임, 활기 있는 네트워킹 자리", scene: "함께 활동하거나 작은 경쟁·협동을 하면서 서로의 성격을 알게 되는 상황", action: "승부보다 응원과 협력을 보여 주세요. 상대를 이기려 하기보다 함께 즐기는 태도가 좋습니다." },
-  식신: { place: "브런치 카페, 맛집 모임, 베이킹·요리 클래스, 취미 원데이 클래스", scene: "음식이나 취미 취향을 나누다가 자연스럽게 다음 약속으로 이어지는 상황", action: "좋았던 메뉴나 수업 이야기를 건네고, 다음에 함께 가볼 만한 곳을 가볍게 제안해 보세요." },
-  상관: { place: "독립서점, 전시회, 영화·공연, 사진·디자인 관련 행사", scene: "작품이나 취향에 대한 의견을 주고받으며 서로의 개성을 발견하는 상황", action: "상대의 취향을 평가하기보다 무엇이 좋았는지 질문해 보세요. 대화의 여지를 남기는 것이 포인트입니다." },
-  편재: { place: "축제, 팝업스토어, 여행·야외 행사, 친구가 초대한 저녁 모임", scene: "평소 생활 반경을 벗어난 장소에서 새로운 사람들과 어울리다 연결되는 상황", action: "일정에 여유를 두고 새로운 모임 한 곳에 참여해 보세요. 연락처 교환은 서로 편할 때만 하세요." },
-  정재: { place: "직장·학교 주변, 스터디, 자격증·언어 수업, 지인 소개 자리", scene: "반복해서 마주치며 약속을 지키는 모습과 생활 태도를 천천히 알아가는 상황", action: "작은 약속을 지키고 대화를 꾸준히 이어가세요. 처음부터 관계를 서두르지 않는 편이 좋습니다." },
-  편관: { place: "프로젝트 협업, 업무 관련 세미나, 봉사활동, 목표가 분명한 모임", scene: "함께 문제를 해결하거나 책임을 나누는 과정에서 신뢰가 생기는 상황", action: "상대의 추진력을 존중하되 내 기준도 분명히 표현하세요. 일과 사생활의 경계도 확인하세요." },
-  정관: { place: "공식적인 모임, 동문·동료 소개, 전문 세미나, 예의를 갖춘 소규모 자리", scene: "서로의 기본 정보와 가치관을 확인할 수 있는 차분한 자리에서 대화가 시작되는 상황", action: "시간 약속과 기본적인 예의를 지키고, 서로 중요하게 여기는 생활 기준을 자연스럽게 나눠 보세요." },
-  편인: { place: "독립서점, 북토크, 전시·강연, 조용한 취미 클래스", scene: "관심 분야가 겹쳐 깊은 대화를 나누며 천천히 친밀해지는 상황", action: "처음부터 많은 이야기를 하기보다 관심 주제 하나를 중심으로 대화를 이어가세요." },
-  정인: { place: "배움 모임, 문화센터, 봉사활동, 지인의 따뜻한 소개 자리", scene: "서로 배려하거나 도움을 주고받는 과정에서 편안함과 신뢰가 쌓이는 상황", action: "고마움을 표현하고 상대의 속도를 존중하세요. 배려가 일방적이지 않은지도 살펴보세요." }
-};
-
 // ---------------------------------------------------------------- 오늘의 프리미엄 운세
 function buildDaily(person, today) {
   const { p, dm, es } = baseCore(person), di = dayInfo(dm, p.day.b, today), info = di.info, T = di.T;
@@ -138,15 +124,13 @@ function buildDaily(person, today) {
   s.push({ h: `2. 오늘의 일진 ${label(T)}일 — 나에게는 '${di.god}'의 날`,
     p: [`오늘의 한마디: ${info[0]}`, info[1], TODAY_REL[di.r][0], `오늘 점수: 연애 ${di.sc[0]} · 재물 ${di.sc[1]} · 직장·학업 ${di.sc[2]}`] });
   s.push({ h: "3. 연애운 · 오늘 만날 인연", p: [info[2], `오늘 마주칠 가능성이 높은 인연의 특징: ${info[6]}.`, `띠로 보면 ${yearAnimal}띠인 당신과 ${good.join("·")}띠가 기운이 잘 맞는 편입니다.`] });
-  const spouseGod = tenGod(dm, BRANCH_MAIN_STEM[p.day.b]), meet = MEET_PROFILE[spouseGod];
-  s.push({ h: "4. 인연을 만날 수 있는 장소와 상황", p: [`사주에서 읽는 관계 성향(${spouseGod})을 일상적인 만남의 접점으로 풀어보면, ${meet.place}처럼 공통 관심사나 지인이 있는 곳을 살펴볼 만합니다.`, `만남의 계기: ${meet.scene}.`, `먼저 해볼 행동: ${meet.action}`, "이는 실제 만남 장소나 시기를 예언하는 내용이 아니라, 새로운 사람을 만날 기회를 넓히기 위한 참고 아이디어입니다."] });
-  s.push({ h: "5. 재물 흐름", p: [info[3], `오늘의 오행은 ${todayEl}입니다. 흐름을 안정시키는 습관: ${elInfo.habit}.`] });
-  s.push({ h: "6. 직장 · 사업 · 학업", p: [info[4]] });
-  s.push({ h: "7. 건강 관리", p: [`오늘의 ${todayEl} 기운은 ${elInfo.organ}과 연관됩니다. ${elInfo.over}`, `내게 부족한 ${ELEMS[needEl]} 기운을 채우는 습관: ${need.habit}.`] });
-  s.push({ h: "8. 시간대별 핵심", list: [`좋은 시간: ${guin.join(", ")} — 도움과 귀인운이 비교적 좋은 시간대입니다.`, `조심할 시간: ${chungHour} — 오늘 일진과 충을 이루는 시간으로 말·결정·이동에 여유를 두세요.`] });
-  s.push({ h: "9. 오늘의 행동 지침 · 기회 분석", list: [info[5], `행운 색 ${need.c}, 행운 방향 ${need.dir} — 부족한 기운을 보완하는 색과 방향입니다.`, `오늘의 기회: ${info[0]} — ${info[1].split('. ')[0].replace(/\.$/, '')}.`, `오늘 피할 것: ${AVOID[di.god]}.`] });
+  s.push({ h: "4. 재물 흐름", p: [info[3], `오늘의 오행은 ${todayEl}입니다. 흐름을 안정시키는 습관: ${elInfo.habit}.`] });
+  s.push({ h: "5. 직장 · 사업 · 학업", p: [info[4]] });
+  s.push({ h: "6. 건강 관리", p: [`오늘의 ${todayEl} 기운은 ${elInfo.organ}과 연관됩니다. ${elInfo.over}`, `내게 부족한 ${ELEMS[needEl]} 기운을 채우는 습관: ${need.habit}.`] });
+  s.push({ h: "7. 시간대별 핵심", list: [`좋은 시간: ${guin.join(", ")} — 도움과 귀인운이 비교적 좋은 시간대입니다.`, `조심할 시간: ${chungHour} — 오늘 일진과 충을 이루는 시간으로 말·결정·이동에 여유를 두세요.`] });
+  s.push({ h: "8. 오늘의 행동 지침 · 기회 분석", list: [info[5], `행운 색 ${need.c}, 행운 방향 ${need.dir} — 부족한 기운을 보완하는 색과 방향입니다.`, `오늘의 기회: ${info[0]} — ${info[1].split('. ')[0].replace(/\.$/, '')}.`, `오늘 피할 것: ${AVOID[di.god]}.`] });
   const nx = [1, 2].map(k => { const ds = ymd(addDays(today, k)), x = dayInfo(dm, p.day.b, ds); return `${ds.slice(5).replace("-", "/")} ${label(x.T)}일 — '${x.god}'의 날, ${x.info[0]} (${x.avg}점)`; });
-  s.push({ h: "10. 내일 · 모레 미리보기", list: nx });
+  s.push({ h: "9. 내일 · 모레 미리보기", list: nx });
   return { title: "오늘의 프리미엄 운세", subtitle: `${today} · ${label(T)}일`, sections: s, note: NOTE };
 }
 
@@ -206,86 +190,6 @@ function buildLifetime(person, year) {
   ], note: NOTE + " 대운(10년 단위 큰 흐름)은 성별과 절입 시각 계산이 필요해 이 리포트에 포함하지 않았습니다." };
 }
 
-
-// ---------------------------------------------------------------- 결혼운·배우자 인연 프로젝트
-function buildMarriage(person, year) {
-  const { p, dm, es } = baseCore(person);
-  const spouseGod = tenGod(dm, BRANCH_MAIN_STEM[p.day.b]);
-  const years = [];
-  for (let i = 0; i < 5; i++) {
-    const y = year + i, stem = mod(y - 4, 10), branch = mod(y - 4, 12);
-    const god = tenGod(dm, stem), relation = relOf(p.day.b, branch);
-    const tone = relation === "hap" || relation === "samhap" ? "관계 확장·소개·약속을 돌아보기 좋은 테마" : relation === "chung" ? "관계의 기준과 생활 리듬을 점검하는 테마" : "관계의 기반과 자기 생활을 다지는 테마";
-    years.push([String(y), `${STEMS[stem]}${BRANCHES[branch]}년`, god, tone]);
-  }
-  return { title: "결혼운 · 배우자 인연 리포트", subtitle: `${year}년부터 5년간의 관계 흐름 참고`, sections: [
-    { h: "1. 내가 관계에서 중요하게 여기는 것", p: [`일간 ${STEMS[dm]}(${DM[dm][0]})의 기질은 ${DM[dm][1]}`, `강점은 ${DM[dm][2]}, 조심할 점은 ${DM[dm][3]}`] },
-    { h: "2. 배우자 자리와 인연의 결", p: [`일지 ${BRANCHES[p.day.b]}의 본기 십성은 ${spouseGod}입니다. ${SPOUSE[spouseGod]}`, `오행 분포: ${es.text}. 관계에서 서로 다른 생활 방식과 속도를 존중하는 것이 중요합니다.`] },
-    { h: "3. 인연을 만날 가능성을 넓히는 장소와 활동", p: [`관계 성향(${spouseGod})에 어울리는 접점은 ${MEET_PROFILE[spouseGod].place}입니다.`, `자연스러운 연결 장면은 ${MEET_PROFILE[spouseGod].scene}.`, `실천 팁: ${MEET_PROFILE[spouseGod].action}`], list: ["관심 있는 활동을 일정에 실제로 넣고, 한 번으로 끝내지 말고 반복해서 참여하기", "친구에게 소개를 부탁할 때 원하는 관계의 기준을 간단히 설명하기", "새로운 만남은 서로의 동의·안전·생활 조건을 확인하며 천천히 진행하기"] },
-    { h: "4. 앞으로 5년의 관계 테마", table: { head: ["연도", "세운", "십성", "살펴볼 주제"], rows: years } },
-    { h: "5. 결혼을 준비할 때 확인할 현실 조건", list: ["돈 관리 방식과 부채·저축 계획을 투명하게 이야기하기", "자녀·주거·가족 돌봄에 대한 생각을 미리 나누기", "갈등이 생겼을 때 대화하고 회복하는 방식을 확인하기", "결혼 시기를 운세만으로 정하지 말고 두 사람의 합의와 현실 여건을 우선하기"] },
-    { h: "6. 나에게 맞는 인연을 알아보는 질문", list: ["함께 있을 때 나답게 말하고 행동할 수 있는가?", "말보다 행동으로 신뢰를 쌓는 사람인가?", "서로의 일·친구·취미와 개인 시간을 존중하는가?"] }
-  ], note: NOTE + " 결혼 시점이나 배우자의 외모·신원을 확정적으로 예언하지 않습니다. 이 콘텐츠는 관계를 돌아보는 참고 자료입니다." };
-}
-
-// ---------------------------------------------------------------- 직업·이직·사업 프로젝트
-function buildCareer(person, year) {
-  const { p, dm } = baseCore(person), g = godGroups(p);
-  const names = ["비겁", "식상", "재성", "관성", "인성"];
-  const strongest = g.indexOf(Math.max(...g)), weakest = g.indexOf(Math.min(...g));
-  const options = GROUP[strongest], rows = [];
-  for (let i = 0; i < 5; i++) {
-    const y = year + i, stem = mod(y - 4, 10), god = tenGod(dm, stem);
-    const focus = ["협업·독립성", "기술·표현·포트폴리오", "성과·수익 구조", "책임·직책·평가", "학습·자격·전문성"][["비견","겁재"].includes(god) ? 0 : ["식신","상관"].includes(god) ? 1 : ["편재","정재"].includes(god) ? 2 : ["편관","정관"].includes(god) ? 3 : 4];
-    rows.push([String(y), god, focus]);
-  }
-  return { title: "직업 · 이직 · 사업운 리포트", subtitle: `${year}년 기준 5년 커리어 테마`, sections: [
-    { h: "1. 타고난 일하는 방식", p: [`일간 ${STEMS[dm]}(${DM[dm][0]}): ${DM[dm][1]}`, `강점: ${DM[dm][2]}`, `주의점: ${DM[dm][3]}`] },
-    { h: "2. 강점이 살아나는 업무 환경", p: [`십성 그룹 분포: ${names.map((n,i)=>`${n} ${g[i]}`).join(" · ")}`, `${options.n} 기운이 상대적으로 두드러집니다. ${options.t}`, `어울리는 업무 방향: ${options.job}`] },
-    { h: "3. 보완하면 좋은 역량", p: [`상대적으로 적은 영역은 ${names[weakest]}입니다. ${GROUP[weakest].t}`, "약점을 단정하기보다 체크리스트·협업 파트너·교육으로 보완할 수 있는 기술을 찾아보세요."] },
-    { h: "4. 앞으로 5년의 커리어 테마", table: { head: ["연도", "세운 십성", "점검할 주제"], rows } },
-    { h: "5. 이직·창업 전 현실 점검", list: ["최소 3~6개월 생활비와 비상자금 확인", "현재 직무에서 쌓은 성과를 수치와 사례로 정리", "새 조직·시장·고객에 대한 정보와 계약 조건 검토", "운세 결과만으로 퇴사·투자·대출을 결정하지 않기"] }
-  ], note: NOTE + " 취업·이직·투자 결과를 보장하지 않습니다. 중요한 결정은 실제 조건과 전문가 조언을 함께 검토하세요." };
-}
-
-
-// ---------------------------------------------------------------- 연애 집중 리포트
-function buildLove(person, year) {
-  const { p, dm, es } = baseCore(person), spouseGod = tenGod(dm, BRANCH_MAIN_STEM[p.day.b]);
-  const themes = [];
-  for (let i = 0; i < 6; i++) {
-    const y = year + i, stem = mod(y - 4, 10), branch = mod(y - 4, 12), reln = relOf(p.day.b, branch);
-    themes.push([`${y}년`, tenGod(dm, stem), reln === "hap" || reln === "samhap" ? "관계 확장·새로운 만남을 돌아보는 해" : reln === "chung" ? "관계의 경계와 기대를 점검하는 해" : "나의 기준과 생활 리듬을 다지는 해"]);
-  }
-  return { title: "연애 집중 리포트", subtitle: "나의 관계 패턴과 건강한 인연 만들기", sections: [
-    { h: "1. 사랑할 때 드러나는 나의 기질", p: [`일간 ${STEMS[dm]}(${DM[dm][0]}): ${DM[dm][1]}`, `관계에서 발휘되는 강점: ${DM[dm][2]}`, `반복되기 쉬운 주의점: ${DM[dm][3]}`] },
-    { h: "2. 배우자 자리로 보는 관계의 테마", p: [`일지 ${BRANCHES[p.day.b]}의 본기 십성은 ${spouseGod}입니다. ${SPOUSE[spouseGod]}`, `오행 분포는 ${es.text}입니다. 서로 다른 표현 방식을 존중하고 확인하는 대화가 중요합니다.`] },
-    { h: "3. 솔로라면 살펴볼 만남의 접점", list: ["친구·동료의 소개처럼 서로의 기본 정보를 확인할 수 있는 자리", "취미·운동·배움처럼 공통 관심사가 자연스럽게 생기는 모임", "온라인에서는 속도보다 신뢰와 안전을 우선하고 개인정보를 서두르지 않기"] },
-    { h: "4. 나에게 잘 맞는 만남 장소와 장면", p: [`배우자 자리의 관계 테마(${spouseGod})를 생활 속 접점으로 바꾸면 ${MEET_PROFILE[spouseGod].place}를 우선 살펴볼 만합니다.`, `예상해 볼 수 있는 만남의 장면: ${MEET_PROFILE[spouseGod].scene}.`, `첫 대화를 여는 방법: ${MEET_PROFILE[spouseGod].action}`], list: ["한 번 방문하고 결과를 기대하기보다 관심 있는 모임을 3~4회 꾸준히 참여해 보세요.", "소개를 받을 때는 상대의 동의와 기본 정보를 존중하고, 첫 만남은 사람이 많은 공공장소에서 진행하세요.", "상대의 외모·직업·나이·실제 신원을 사주만으로 특정할 수는 없습니다."] },
-    { h: "5. 연애 중이라면 점검할 대화", list: ["서운함을 평가나 비난 대신 구체적인 상황과 감정으로 말하기", "연락 빈도·개인 시간·돈 관리 등 생활 기준을 서로 확인하기", "갈등이 생겼을 때 잠시 쉬고 다시 이야기할 약속을 정하기"] },
-    { h: "6. 앞으로 6년의 관계 테마", table: { head: ["연도", "십성", "관계에서 살펴볼 주제"], rows: themes } },
-    { h: "7. 나에게 던지는 세 가지 질문", list: ["나는 어떤 순간에 존중받는다고 느끼는가?", "상대에게 바라는 것을 나도 행동으로 보여주고 있는가?", "설렘과 별개로 안전하고 편안한 관계인가?"] }
-  ], note: NOTE + " 특정 인물과의 만남, 상대의 외모·신원 또는 연애 성사를 예언하지 않습니다." };
-}
-
-// ---------------------------------------------------------------- 재물·사업 리포트
-function buildWealth(person, year) {
-  const { p, dm, es } = baseCore(person), g = godGroups(p), wealth = g[2], rows = [];
-  for (let i = 0; i < 6; i++) {
-    const y = year + i, stem = mod(y - 4, 10), god = tenGod(dm, stem);
-    rows.push([`${y}년`, god, ["비용 구조와 협업 방식 점검", "성과를 수익으로 연결하는 방법 찾기", "현금흐름과 계약 조건 점검", "책임·규정·세금 관련 기본 확인", "기술·자격·전문성에 투자"][(["비견","겁재"].includes(god)?0:["식신","상관"].includes(god)?1:["편재","정재"].includes(god)?2:["편관","정관"].includes(god)?3:4)]]);
-  }
-  const wealthText = wealth >= 3 ? "재성 기운이 상대적으로 두드러집니다. 수입 기회뿐 아니라 지출·위험 관리 규칙을 함께 세우는 것이 좋습니다." : wealth === 0 ? "재성 기운이 상대적으로 적게 나타납니다. 전문성·기술·신뢰를 쌓아 수익으로 연결하는 구조를 고민해 보세요." : "재성 기운이 중간 정도입니다. 단기 성과보다 꾸준한 현금흐름과 저축 습관을 점검해 보세요.";
-  return { title: "재물 · 사업 전략 리포트", subtitle: `${year}년 기준 재정 습관과 일의 방향`, sections: [
-    { h: "1. 나의 재물 테마", p: [`십성 분포 중 재성은 ${wealth}입니다. ${wealthText}`, `오행 분포: ${es.text}`, `일간 ${STEMS[dm]}(${DM[dm][0]}): ${DM[dm][1]}`] },
-    { h: "2. 수입을 만드는 나의 강점", p: [`강점: ${DM[dm][2]}`, `일하는 방식: ${GROUP[g.indexOf(Math.max(...g))].n} 기운이 상대적으로 두드러집니다. ${GROUP[g.indexOf(Math.max(...g))].job}`] },
-    { h: "3. 지출·저축 점검 루틴", list: ["고정비·변동비·비정기 지출을 구분해 기록하기", "비상자금과 단기 목표 자금을 분리하기", "고금리 부채와 자동결제를 정기적으로 점검하기", "큰 지출은 하루 이상 숙려하고 비교 견적을 확인하기"] },
-    { h: "4. 사업·부업을 고민한다면", list: ["고객이 실제로 비용을 지불할 문제인지 먼저 검증하기", "초기 고정비를 낮추고 작은 실험으로 수요 확인하기", "동업·외주·납품은 역할과 정산 조건을 문서로 남기기", "세금·인허가·개인정보 등 업종별 의무를 확인하기"] },
-    { h: "5. 앞으로 6년의 재정·커리어 테마", table: { head: ["연도", "십성", "점검 주제"], rows } },
-    { h: "6. 현실적인 실행 계획", list: ["이번 주: 최근 한 달 지출 내역을 분류하기", "이번 달: 줄일 수 있는 고정비 한 가지 정하기", "3개월: 수입을 높일 기술·고객·상품 실험 하나 실행하기"] }
-  ], note: NOTE + " 수익·투자 성과를 보장하지 않습니다. 투자·대출·세무 결정은 객관적 자료와 자격 있는 전문가의 조언을 우선하세요." };
-}
-
 // ---------------------------------------------------------------- 궁합
 function buildCompat(a, b, start) {
   const A = pillars(a), B = pillars(b), da = A.day.s, db = B.day.s;
@@ -311,45 +215,6 @@ function buildCompat(a, b, start) {
   ], note: NOTE + " 상대방의 정보는 본인 동의를 받은 경우에만 입력해야 합니다." };
 }
 
-
-// ---------------------------------------------------------------- 미래 연대기: 선택한 미래 시점의 세운을 생활 영역별로 풀어보는 리포트
-function buildFuture(person, year, horizon, fullPackage = false) {
-  const { p, dm, es } = baseCore(person);
-  const targetYear = year + horizon;
-  const points = fullPackage ? Array.from({length:20}, (_,i)=>i+1)
-    : horizon <= 3 ? Array.from({length:horizon}, (_,i)=>i+1)
-    : horizon <= 5 ? [1,2,3,4,5] : [1,2,3,5,10,15,20].filter((v,i,a)=>v<=horizon&&a.indexOf(v)===i);
-  const rows = points.map(n => {
-    const y = year + n, stem = mod(y - 4, 10), branch = mod(y - 4, 12);
-    const god = tenGod(dm, stem), relation = relOf(p.day.b, branch);
-    const relationText = relation === "hap" || relation === "samhap" ? "관계와 협력의 접점을 살펴볼 시기"
-      : relation === "chung" ? "변화에 대비하고 생활의 균형을 점검할 시기"
-      : "기반을 다지고 꾸준함을 쌓을 시기";
-    return [String(y), `${STEMS[stem]}${BRANCHES[branch]}년`, god, YEARGOD[god], relationText];
-  });
-  const stem = mod(targetYear - 4, 10), branch = mod(targetYear - 4, 12);
-  const god = tenGod(dm, stem), relation = relOf(p.day.b, branch);
-  const tone = YEARGOD[god];
-  const relationTone = relation === "hap" || relation === "samhap"
-    ? "사람과 협력, 소개, 관계 확장을 주제로 삼아볼 만한 해입니다."
-    : relation === "chung"
-      ? "변화가 생겼을 때 무리하게 버티기보다 우선순위와 생활 리듬을 재정비하는 해로 해석할 수 있습니다."
-      : "눈에 띄는 변화보다 기본기를 다지고 꾸준히 쌓아가는 태도가 도움이 되는 해입니다.";
-  const spouseGod = tenGod(dm, BRANCH_MAIN_STEM[p.day.b]);
-  const meet = MEET_PROFILE[spouseGod];
-  const sections = [
-    { h: "1. 나의 사주 기본 구성", table: pillarTable(p), p: [`일간 ${STEMS[dm]}(${ELEMS[STEM_EL[dm]]}) '${DM[dm][0]}'의 기질을 바탕으로 ${horizon}년 뒤의 흐름을 살펴봅니다.`, `오행 분포: ${es.text}. ${es.lack.length ? `생활에서 ${es.lack.map(i=>ELEMS[i]).join("·")} 기운을 보완하는 습관을 참고하세요.` : "균형을 유지하는 생활 리듬이 중요합니다."}`] },
-    { h: `2. ${targetYear}년의 핵심 테마`, p: [`해의 십성은 ${god}입니다. ${tone}`, relationTone, "사주 해석은 가능성과 주제를 살펴보는 전통적 관점이며 특정 사건이나 결과를 보장하지 않습니다."] },
-    { h: "3. 연애 · 인연의 흐름", p: [`배우자 자리의 관계 성향은 ${spouseGod}입니다. ${SPOUSE[spouseGod]}`, `새로운 관계의 접점을 넓히고 싶다면 ${meet.place}처럼 관심사를 공유할 수 있는 환경을 고려해 보세요.`, `실천 팁: ${meet.action}`, "현재 관계가 있다면 상대를 운세에 맞추기보다 실제 대화와 상호 존중을 기준으로 관계를 살펴보세요."] },
-    { h: "4. 재물 · 자산 관리", p: [god === "정재" || god === "편재" ? "재성의 관점에서는 수입 기회뿐 아니라 지출과 위험 관리의 균형을 함께 살펴볼 시기입니다." : "재물은 운세만으로 판단하지 말고 전문성과 소득 구조, 저축 습관을 함께 키우는 방향이 좋습니다.", "큰 투자·대출·계약은 운세 결과만으로 결정하지 말고 객관적인 자료와 전문가 조언을 확인하세요.", "장기 목표를 세우고 비상자금, 부채, 고정지출을 주기적으로 점검해 보세요."] },
-    { h: "5. 직업 · 사업 · 성장", p: [`${GROUP[god === "정관" || god === "편관" ? 3 : god === "식신" || god === "상관" ? 1 : god === "정재" || god === "편재" ? 2 : god === "정인" || god === "편인" ? 4 : 0].job} 같은 분야에서 자신의 강점을 어떻게 활용할지 생각해 볼 수 있습니다.`, "이직·창업·진학 등 큰 선택은 준비 기간과 현실적인 조건을 먼저 점검하고 작은 실험으로 검증하세요."] },
-    { h: "6. 인간관계 · 귀인", p: [`${relationTone} 특히 서로의 역할과 기대를 분명히 하는 대화가 관계를 안정시키는 데 도움이 됩니다.`, "도움이 되는 사람을 기다리기보다 관심 분야의 모임, 배움, 협업에 참여해 연결의 폭을 넓혀 보세요."] },
-    { h: "7. 그 시기를 준비하는 행동", list: ["1년 단위 목표를 작게 나누고 분기마다 점검하기", "건강·재정·관계 중 한 가지를 우선순위로 정해 꾸준히 관리하기", "중요한 선택은 운세 외에 실제 정보와 신뢰할 수 있는 사람의 의견을 함께 확인하기"] },
-    { h: `8. ${year}년부터 ${targetYear}년까지의 미래 흐름`, table: { head: ["연도", "간지", "핵심 십성", "연간 테마", "관계 흐름"], rows } }
-  ];
-  return { title: fullPackage ? "20년 전체 미래 연대기 종합판" : `${horizon}년 뒤 나의 미래 연대기`, subtitle: fullPackage ? `${year}년부터 ${targetYear}년까지 20년의 연도별 흐름` : `${year}년을 기준으로 살펴보는 ${targetYear}년의 장기 흐름`, sections, note: NOTE + " 장기 미래 해석은 전통 명리의 연도별 상징을 바탕으로 한 참고 콘텐츠입니다. 실제 사건·재산·결혼·건강 상태를 예측하거나 보장하지 않습니다." };
-}
-
 const NOTE = "이 리포트는 전통 명리(사주) 이론을 바탕으로 한 참고·오락용 해석입니다. 미래를 확정하거나 보장하지 않으며 의료·법률·투자 등 전문적 판단을 대체하지 않습니다. 절기 경계 생일은 계산 오차가 있을 수 있고, 음력은 평달만 지원합니다.";
 
 function build(productId, person, opts = {}) {
@@ -358,12 +223,6 @@ function build(productId, person, opts = {}) {
   if (productId === "monthly") return buildMonthly(person, today);
   if (productId === "lifetime") return buildLifetime(person, Number(today.slice(0, 4)));
   if (productId === "compat") return buildCompat(person, opts.partner, today);
-  if (productId === "marriage") return buildMarriage(person, Number(today.slice(0, 4)));
-  if (productId === "career") return buildCareer(person, Number(today.slice(0, 4)));
-  if (productId === "love") return buildLove(person, Number(today.slice(0, 4)));
-  if (productId === "wealth") return buildWealth(person, Number(today.slice(0, 4)));
-  const futureMatch = /^future_(1|2|3|5|10|15|20|all)$/.exec(productId);
-  if (futureMatch) return buildFuture(person, Number(today.slice(0, 4)), futureMatch[1] === "all" ? 20 : Number(futureMatch[1]), futureMatch[1] === "all");
   throw new Error("unknown product");
 }
 module.exports = { build };

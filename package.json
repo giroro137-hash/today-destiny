@@ -1,10 +1,9 @@
 {
   "name": "today-destiny-mvp",
-  "version": "1.5.0",
+  "version": "1.0.0",
   "scripts": {
     "start": "node src/server.js",
-    "build:characters": "node scripts/build_characters.js",
-    "test": "node scripts/smoke_test.js"
+    "build:characters": "node scripts/build_characters.js"
   },
   "dependencies": {
     "better-sqlite3": "^12.10.0",

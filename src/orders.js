@@ -10,19 +10,7 @@ const products = {
   daily:    { name: "오늘의 프리미엄 운세", amount: 2900 },
   monthly:  { name: "월간 운세",           amount: 9900 },
   lifetime: { name: "평생 사주 리포트",     amount: 19900 },
-  compat:   { name: "궁합 분석",           amount: 22900 },
-  marriage: { name: "결혼운 · 배우자 인연 리포트", amount: 12900 },
-  career:   { name: "직업 · 이직 · 사업운 리포트", amount: 9900 },
-  love:     { name: "연애 집중 리포트", amount: 7900 },
-  wealth:   { name: "재물 · 사업 전략 리포트", amount: 9900 },
-  future_1:  { name: "1년 뒤 나의 미래 연대기", amount: 3900 },
-  future_2:  { name: "2년 뒤 나의 미래 연대기", amount: 4900 },
-  future_3:  { name: "3년 뒤 나의 미래 연대기", amount: 5900 },
-  future_5:  { name: "5년 뒤 나의 미래 연대기", amount: 7900 },
-  future_10: { name: "10년 뒤 나의 미래 연대기", amount: 9900 },
-  future_15: { name: "15년 뒤 나의 미래 연대기", amount: 12900 },
-  future_20: { name: "20년 뒤 나의 미래 연대기", amount: 14900 },
-  future_all:{ name: "20년 미래 연대기 전체 패키지", amount: 29900 }
+  compat:   { name: "궁합 분석",           amount: 22900 }
 };
 const MAX_VIEWS = 10; // 주문 1건당 리포트 조회 상한(링크 공유 남용 방지)
 const kstToday = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
@@ -104,7 +92,7 @@ function createOrders({ db, env = process.env, fetchFn = fetch }) {
       try {
         const report = build(o.product, person, { today: o.report_date, partner });
         let characters = null;
-        if (o.product !== "compat") { characters = chars.reveal(person, o.id, body?.preferredGender === "m" ? "m" : "f"); db.prepare("UPDATE orders SET char_keys=? WHERE id=?").run(characters.keys.join(","), o.id); }
+        if (o.product !== "compat") { characters = chars.reveal(person, o.id); db.prepare("UPDATE orders SET char_keys=? WHERE id=?").run(characters.keys.join(","), o.id); }
         db.prepare("UPDATE orders SET report_views=report_views+1 WHERE id=?").run(o.id);
         return R(200, { report, characters });
       } catch (e) { return R(400, { error: e.message || "리포트를 만들 수 없습니다." }); }
