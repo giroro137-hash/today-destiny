@@ -121,9 +121,31 @@ footer{margin-top:22px;font-size:11px;color:var(--mute);line-height:1.8;text-ali
 @media print{html,body{background:#fff!important;color:#000!important}.wrap>section:not(#report),footer,.note,#share,.noprint{display:none!important}
  .panel,.card{background:#fff!important;border-color:#bbb!important}.rep h2,.rep .sec h3{color:#000!important}p,li,td,th,span,b{color:#000!important}.tbl{overflow:visible}.tbl td,.tbl th{white-space:normal}}
 @media(max-width:420px){.grid{grid-template-columns:1fr}h1{font-size:26px}}
+
+/* cinematic cover / AI live-action webtoon portrait cards */
+.cover-screen{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:22px;background:linear-gradient(180deg,#100d22aa,#100d22cc),url('/images/cover-art.webp') center 34%/cover no-repeat;transition:opacity .45s ease,visibility .45s ease}
+.cover-screen.closed{opacity:0;visibility:hidden;pointer-events:none}
+.cover-inner{width:min(760px,94vw);text-align:center;padding:34px 24px 28px;border:1px solid #d9bd83aa;border-radius:28px;background:linear-gradient(145deg,#211a3dcc,#100f25e8);box-shadow:0 24px 90px #000b;backdrop-filter:blur(8px)}
+.cover-kicker{color:#f1d69c;letter-spacing:.25em;font-size:11px;font-weight:800}
+.cover-inner .gold{color:var(--gold)}
+.cover-inner h1{font-size:clamp(30px,5vw,54px);text-shadow:0 3px 20px #000;line-height:1.2;margin:14px 0}
+.cover-inner p{color:#eee1ff;font-size:14px}
+.cover-inner .btn{max-width:420px;margin:20px auto 0}
+.cover-note{font-size:11px;color:#c6b9d8;margin-top:12px}
+.mcard img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center;border-radius:12px}
+@media(max-width:600px){.cover-inner{padding:28px 18px}.cover-screen{background-position:52% center}}
 </style>
 </head>
 <body>
+<div class="cover-screen" id="coverScreen" role="dialog" aria-label="오늘의 운명 표지">
+  <div class="cover-inner">
+    <div class="cover-kicker">✦ TODAY'S DESTINY ✦</div>
+    <h1>오늘, 당신의 운명에<br><span class="gold">새로운 인연이 찾아옵니다</span></h1>
+    <p>도령과 선녀가 들려주는 나만의 사주 이야기<br>연애 · 재물 · 인생의 흐름을 만나보세요.</p>
+    <button class="btn" id="enterApp">운명 이야기 시작하기 ✦</button>
+    <div class="cover-note">모든 운세와 인연 콘텐츠는 오락 및 참고를 위한 가상 해석입니다.</div>
+  </div>
+</div>
 <main class="wrap">
 <nav class="topbar"><div class="topbrand">✦ TODAY'S DESTINY</div><div class="toplinks"><a href="#form">내 운세</a><a href="#result">오늘의 흐름</a><a href="#shop">프리미엄</a></div></nav>
 
@@ -152,7 +174,7 @@ footer{margin-top:22px;font-size:11px;color:var(--mute);line-height:1.8;text-ali
       <div><label for="calendar">달력 기준</label>
         <select id="calendar"><option value="solar">양력</option><option value="lunar">음력</option></select></div>
       <div><label for="time">태어난 시간 <span class="note">(모르면 ‘모름’)</span></label>
-        <select id="time"><option value="unknown">모름</option><option>자시</option><option>축시</option><option>인시</option><option>묘시</option><option>진시</option><option>사시</option><option>오시</option><option>미시</option><option>신시</option><option>유시</option><option>술시</option><option>해시</option></select></div>
+        <select id="time"><option value="unknown">모름</option><option value="자시">자시 (23:00~01:00)</option><option value="축시">축시 (01:00~03:00)</option><option value="인시">인시 (03:00~05:00)</option><option value="묘시">묘시 (05:00~07:00)</option><option value="진시">진시 (07:00~09:00)</option><option value="사시">사시 (09:00~11:00)</option><option value="오시">오시 (11:00~13:00)</option><option value="미시">미시 (13:00~15:00)</option><option value="신시">신시 (15:00~17:00)</option><option value="유시">유시 (17:00~19:00)</option><option value="술시">술시 (19:00~21:00)</option><option value="해시">해시 (21:00~23:00)</option></select></div>
     </div>
     <label class="chk"><input type="checkbox" id="consent" required><span>[필수] 만 14세 이상이며, <a href="/privacy.html" target="_blank">개인정보 수집·이용</a>에 동의합니다.<small>항목: 생년월일·달력 구분·태어난 시간 / 목적: 운세 풀이 제공 / 보관: 서버에 저장하지 않고 풀이 후 폐기됩니다. (무료 체험 중복 확인용으로 접속 정보의 암호화 값만 보관)</small></span></label>
     <button class="btn" id="go">첫 운세 무료로 보기 ✦</button>
@@ -183,7 +205,7 @@ footer{margin-top:22px;font-size:11px;color:var(--mute);line-height:1.8;text-ali
       <span class="blur">그 사람이 나타날 가능성이 높은 시간대와 장소, 대화를 시작하는 방법, 관계가 깊어지는 조건</span>
       <span class="more">🔒 자세한 내용은 프리미엄 리포트에서 확인할 수 있어요</span></div>
     <div class="card teaser" id="loveTeaser"><h3>💘 나의 인연, 얼굴이 궁금하다면</h3>
-      <p class="note">사주 기운을 바탕으로 구성한 가상 인연 캐릭터 미리보기입니다. 실제 미래 배우자의 외모를 예측하거나 보장하지 않습니다. 결제 후에는 주문에 배정된 캐릭터 원본과 성향 정보를 확인할 수 있습니다.</p>
+      <p class="note">AI로 제작한 가상 인연 캐릭터 미리보기입니다. 실제 미래 배우자의 외모를 예측하거나 보장하지 않습니다. 결제 후에는 주문에 배정된 캐릭터 원본과 성향 정보를 확인할 수 있습니다.</p>
       <div class="pair" id="pair"></div>
       <button type="button" class="btn" id="unlock">모자이크 풀고 인연 확인하기 · ₩2,900</button></div>
     <div class="card warn"><h3>⚠️ 오늘 특히 신경 쓸 시간 · <span id="ctime"></span></h3><p id="ctext"></p></div>
@@ -444,6 +466,9 @@ if(keep.get())$("reopen").classList.remove("hidden");
   if(!st||st.orderId!==pid)return msg("결제 정보를 복구하지 못했습니다. 위에서 ‘구매한 리포트 다시 보기’를 이용해 주세요.");
   $("shop").scrollIntoView();try{await finish(st)}catch(e){msg(e.message)}
 })();
+</script>
+<script>
+(()=>{const cover=document.getElementById('coverScreen');const enter=document.getElementById('enterApp');if(enter&&cover){enter.addEventListener('click',()=>{cover.classList.add('closed');document.body.style.overflow='';});document.body.style.overflow='hidden';}})();
 </script>
 </body>
 </html>
