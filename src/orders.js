@@ -35,7 +35,7 @@ function parsePerson(b) {
   if (!b || !["solar", "lunar"].includes(b.calendar) || !validYMD(b.birthDate, b.calendar)) return null;
   if (b.birthTime !== "unknown" && !HOURS.includes(b.birthTime)) return null;
   if (b.birthDate > kstToday() || b.birthDate < "1900-01-01") return null;
-  return { birthDate: b.birthDate, calendar: b.calendar, birthTime: b.birthTime };
+  return { birthDate: b.birthDate, calendar: b.calendar, birthTime: b.birthTime, gender: b.gender === "female" ? "female" : "male" };
 }
 
 function createOrders({ db, env = process.env, fetchFn = fetch }) {

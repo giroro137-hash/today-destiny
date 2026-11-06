@@ -22,14 +22,18 @@ const KEY_RE = /^[mf]_(dodo|sexy|cute|pretty|charisma)_[0-2]$/;
 function pick(person) {
   const p = S.pillars(person), dm = p.day.s;
   const t = (stemOrBranch) => TYPE_BY_GOD[S.tenGod(dm, S.BRANCH_MAIN_STEM[stemOrBranch])];
+  const userGender = person.gender === "female" ? "female" : "male";
+  const opposite = userGender === "male" ? "f" : "m";
+  const guideGender = opposite;
   const mk = (role, gender, type, v) => ({ role, gender, type, key: `${gender}_${type}_${v % 3}` });
   const tA = t(p.day.b); let tB = t(p.month.b);
-  if (tB === tA) tB = TYPES[(TYPES.indexOf(tA) + 1 + (p.year.b % 4)) % 5]; // 두 인연은 항상 서로 다른 분위기로
-  return [mk("도령", "m", tA, p.year.s + p.year.b), mk("연애상대", "f", tB, p.month.s + p.month.b)];
+  if (tB === tA) tB = TYPES[(TYPES.indexOf(tA) + 1 + (p.year.b % 4)) % 5];
+  return [
+    mk(userGender === "male" ? "풀이 선녀" : "풀이 도령", guideGender, tA, p.year.s + p.year.b),
+    mk("나의 인연", opposite, tB, p.month.s + p.month.b)
+  ];
 }
-const teaser = person => pick(person).map(c => c.role === "도령"
-  ? ({ role: c.role, image: `/characters/${c.key}.png`, mosaic: false })
-  : ({ role: c.role, image: `/mosaic/${mosaicName(c.key)}.png`, mosaic: true }));
+const teaser = person => pick(person).slice(1).map(c => ({ role: c.role, mosaic: `/mosaic/${mosaicName(c.key)}.png` }));
 function reveal(person, orderId) {
   const list = pick(person);
   return {

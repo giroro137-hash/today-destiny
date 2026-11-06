@@ -25,9 +25,9 @@ const safe = fn => async (req, res) => { try { await fn(req, res); } catch (e) {
 app.get("/api/products", (req, res) => res.json(orders.products));
 
 app.post("/api/free-reading", (req, res) => {
-  const { birthDate, calendar, birthTime, consent } = req.body || {};
+  const { birthDate, calendar, birthTime, gender, consent } = req.body || {};
   if (consent !== true) return res.status(400).json({ error: "개인정보 수집·이용 및 만 14세 이상 확인에 동의해 주세요." });
-  if (!["solar", "lunar"].includes(calendar) || !validYMD(birthDate, calendar) || typeof birthTime !== "string")
+  if (!["solar", "lunar"].includes(calendar) || !validYMD(birthDate, calendar) || typeof birthTime !== "string" || !["male", "female"].includes(gender))
     return res.status(400).json({ error: "입력값을 확인해 주세요." });
   if (new Date(birthDate) > new Date()) return res.status(400).json({ error: "미래 날짜는 입력할 수 없습니다." });
   try {
@@ -38,8 +38,8 @@ app.post("/api/free-reading", (req, res) => {
     throw e;
   }
   let teaser = null;
-  try { teaser = characters.teaser({ birthDate, calendar, birthTime }); } catch (_) {}
-  res.json({ reading: makeReading({ birthDate, calendar, birthTime }), teaser, demo: true,
+  try { teaser = characters.teaser({ birthDate, calendar, birthTime, gender }); } catch (_) {}
+  res.json({ reading: makeReading({ birthDate, calendar, birthTime, gender }), teaser, demo: true,
     disclaimer: "현재는 흐름 확인용 예시 풀이이며 정통 사주(만세력) 계산 결과가 아닙니다." });
 });
 
